@@ -54,14 +54,38 @@ INSERT INTO Vak (vak, naam) VALUES
 	('DMDD', 'Data Modelling and Database Design');
 
 
-INSERT INTO Cijfer (studentnr, vak, cijfer, docent, toetsdatum) VALUES 
-	(1,	'SAQ',	5.7,	'MKE',	'2017-09-17'),
-	(1,	'DB',	4.8,	'BDRT',	'2017-09-19'),
-	(2,	'DMDD',	8.1,	'MKE',	'2017-09-28');
-
-
 -- 1.d
 
 ALTER TABLE Cijfer ADD
 	CONSTRAINT BTWN_Cijfer
 		CHECK (cijfer BETWEEN 1 AND 10);
+
+-- 2.a
+
+INSERT INTO Cijfer (studentnr, vak, cijfer, docent, toetsdatum) VALUES 
+	(1,	'SAQ',	5.7,	'MKE',	'2017-09-17'),
+	(1,	'DB',	4.8,	'BDRT',	'2017-09-19'),
+	(2,	'DMDD',	8.1,	'MKE',	'2017-09-28');
+
+SELECT * FROM CIJFER
+
+-- 2.b
+
+UPDATE Cijfer
+	SET cijfer = cijfer + 1
+	WHERE vak = 'DMDD'
+	AND toetsdatum = '2017-09-28';
+
+-- 2.c
+
+DELETE FROM Cijfer
+	WHERE vak LIKE 'SA%';
+
+-- 3.a
+
+SELECT studentnr, vak, toetsdatum
+	FROM Cijfer
+	WHERE cijfer >= 5.5
+	AND vak = 'DMDD'
+	AND YEAR(toetsdatum) = 2017
+	ORDER BY toetsdatum DESC;
