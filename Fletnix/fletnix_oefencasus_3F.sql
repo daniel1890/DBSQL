@@ -1,0 +1,1 @@
+CREATE VIEW OpenstaandeKostenPerGebruiker (name, totalprice)	AS SELECT C.name, sum(price) AS totaalOpenstaandBedrag	FROM WatchHistory W	INNER JOIN Customer C	ON W.customer_mail_address = C.customer_mail_address	GROUP BY C.name
